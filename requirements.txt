@@ -1,5 +1,5 @@
-from synthpop import Synthpop
+synthpop
 
-import matplotlib.pyplot as plt
+matplotlib.pyplot
 
-from PIL import Image
+PIL
