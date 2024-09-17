@@ -10,7 +10,7 @@ from synthpop import Synthpop
 
 import matplotlib.pyplot as plt
 
-from pillow import Image
+from PIL import Image
 
 import numpy as np
 
@@ -93,16 +93,133 @@ st.dataframe(data)
 
 
 
+# DEF CART FUNCTIONS :
+
+
+class CARTDataSynthesizer:
+    def __init__(self, max_depth=5, min_samples_split=2):
+        self.max_depth = max_depth
+        self.min_samples_split = min_samples_split
+        self.tree = None
+
+    # Gini Index for categorical splitting
+    def gini_index(self, groups, dataset):
+        n_instances = sum([len(group) for group in groups])
+        gini = 0.0
+        for group in groups:
+            size = len(group)
+            if size == 0:
+                continue
+            score = 0.0
+            # Score the group based on feature proportions
+            unique_classes = [list(col) for col in np.array(dataset).T]  # Columns (features) in the dataset
+            for values in unique_classes:
+                proportion = values.count(values[0]) / size
+                score += proportion * proportion
+            gini += (1.0 - score) * (size / n_instances)
+        return gini
+
+    # Split the dataset based on a feature and a value
+    def test_split(self, index, value, dataset):
+        left, right = [], []
+        for row in dataset:
+            if isinstance(value, (int, float)):  # For numerical features like Age
+                if row[index] < value:
+                    left.append(row)
+                else:
+                    right.append(row)
+            else:  # For categorical features like Sex, Race, Treatment, Outcome
+                if row[index] == value:
+                    left.append(row)
+                else:
+                    right.append(row)
+        return left, right
+
+    # Select the best split point for the dataset
+    def get_best_split(self, dataset):
+        best_index, best_value, best_score, best_groups = None, None, float('inf'), None
+        for index in range(len(dataset[0])):  # For each feature
+            for row in dataset:
+                groups = self.test_split(index, row[index], dataset)
+                gini = self.gini_index(groups, dataset)
+                if gini < best_score:
+                    best_index, best_value, best_score, best_groups = index, row[index], gini, groups
+        return {'index': best_index, 'value': best_value, 'groups': best_groups}
+
+    # Recursive split
+    def split(self, node, depth):
+        left, right = node['groups']
+        del(node['groups'])
+        if not left or not right:
+            node['left'] = node['right'] = self.to_terminal(left + right)
+            return
+        if depth >= self.max_depth:
+            node['left'], node['right'] = self.to_terminal(left), self.to_terminal(right)
+            return
+        if len(left) <= self.min_samples_split:
+            node['left'] = self.to_terminal(left)
+        else:
+            node['left'] = self.get_best_split(left)
+            self.split(node['left'], depth + 1)
+        if len(right) <= self.min_samples_split:
+            node['right'] = self.to_terminal(right)
+        else:
+            node['right'] = self.get_best_split(right)
+            self.split(node['right'], depth + 1)
+
+    # Create terminal nodes (random sample from the group)
+    def to_terminal(self, group):
+        return random.choice(group)  # Randomly select a row from the group
+
+    # Build the decision tree using the features
+    def fit(self, dataset):
+        self.tree = self.get_best_split(dataset)
+        self.split(self.tree, 1)
+
+    # Traverse the tree to synthesize a new sample
+    def traverse_tree(self, node):
+        while isinstance(node, dict):  # While we haven't hit a terminal node
+            if random.random() < 0.5:
+                node = node['left']
+            else:
+                node = node['right']
+        return node  # The leaf node is a synthetic row
+
+    # Synthesize a new dataset by traversing the tree
+    def synthesize(self, num_samples):
+        new_data = []
+        for _ in range(num_samples):
+            new_row = self.traverse_tree(self.tree)
+            new_data.append(new_row)
+        return np.array(new_data)
+
+
+
 
 #st.data_editor('Edit data', data)
 
+# Convert the DataFrame to a NumPy array for processing
+dataset = data.values
+
+# Initialize the CART synthesizer and fit the model
+synthesizer = CARTDataSynthesizer(max_depth=3, min_samples_split=2)
+synthesizer.fit(dataset)
+
+# Synthesize a new dataset with 5 samples
+synthetic_data = synthesizer.synthesize(num_samples=5)
+
+# Convert back to DataFrame for readability
+synthetic_df = pd.DataFrame(synthetic_data, columns=data.columns)
+print("Synthetic Data:")
+print(synthetic_df)
+
+
 def synthesise(data, method):
     if method == "CART":
-        spop = Synthpop()
-        dtypes = None
-        spop.fit(data, dtypes)
-        num_rows = len(data)
-        synth_data = spop.generate(k=num_rows)
+        dataset = data.values
+        synthesizer = CARTDataSynthesizer(max_depth=3, min_samples_split=2)
+        synthesizer.fit(dataset)
+        synth_data = pd.DataFrame(synthetic_data, columns=data.columns)
         return synth_data
     if method == "Random Sampling":
         n = len(data)
