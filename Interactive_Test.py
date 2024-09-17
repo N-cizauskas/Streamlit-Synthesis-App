@@ -10,7 +10,7 @@ from synthpop import Synthpop
 
 import matplotlib.pyplot as plt
 
-from PIL import Image
+from pillow import Image
 
 import numpy as np
 
