@@ -3,3 +3,5 @@ synthpop
 matplotlib
 
 pillow
+
+scikit-learn
