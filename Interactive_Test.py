@@ -14,6 +14,9 @@ from PIL import Image
 
 import numpy as np
 
+from sklearn.linear_model import LinearRegression, LogisticRegression
+
+
 # design page
 
 if "randomise_clicked" not in st.session_state:
@@ -214,6 +217,91 @@ print("Synthetic Data:")
 print(synthetic_df)
 
 
+
+
+# for lin/log regression:
+# 1. Train a logistic regression model for binary variables
+def train_logistic_model(data, target):
+    X = data.drop(columns=[target])
+    y = data[target]
+    model = LogisticRegression()
+    model.fit(X, y)
+    return model
+
+# 2. Train a linear regression model for continuous or categorical variables
+def train_linear_model(data, target):
+    X = data.drop(columns=[target])
+    y = data[target]
+    model = LinearRegression()
+    model.fit(X, y)
+    return model
+
+# 3. Function to synthesize data based on the fitted model
+def synthesize_data_logistic(model, X):
+    probabilities = model.predict_proba(X)[:, 1]
+    return np.random.binomial(1, probabilities)
+
+def synthesize_data_linear(model, X):
+    predictions = model.predict(X)
+    # Adding noise to linear predictions to make them more realistic
+    noise = np.random.normal(0, 1, size=predictions.shape)
+    return predictions + noise
+
+# 4. Fill missing values with sampled data from original dataset
+def fill_missing_values(X, reference_data):
+    X_filled = X.copy()
+    for col in X.columns:
+        if X[col].isnull().any():
+            # Fill missing values from the reference_data (sampled randomly)
+            X_filled[col].fillna(reference_data[col].sample(n=1).values[0], inplace=True)
+    return X_filled
+
+# 5. Fit models to each column based on type (logistic for binary, linear for continuous/categorical)
+def create_synthetic_data(data, num_samples=5):
+    synthetic_data = pd.DataFrame(columns=data.columns)
+    
+    # List of binary and continuous/categorical columns
+    binary_columns = ["Sex", "Treatment", "Outcome"]
+    continuous_columns = ["Age", "Race"]
+    
+    models = {}
+    
+    # Train models for each binary and continuous variable
+    for col in binary_columns:
+        models[col] = train_logistic_model(data, col)
+    for col in continuous_columns:
+        models[col] = train_linear_model(data, col)
+    
+    # Start generating synthetic data
+    for _ in range(num_samples):
+        new_sample = {}
+
+        # Predict each column based on the trained model and other variables
+        for col in binary_columns:
+            # Ensure we use the same columns for prediction as we used for fitting
+            if new_sample:
+                X = pd.DataFrame([new_sample], columns=data.drop(columns=[col]).columns)
+                X = fill_missing_values(X, data)  # Fill any missing values with original data samples
+            else:
+                X = data.drop(columns=[col]).sample(n=1)
+            new_sample[col] = int(synthesize_data_logistic(models[col], X)[0])
+
+        for col in continuous_columns:
+            if new_sample:
+                X = pd.DataFrame([new_sample], columns=data.drop(columns=[col]).columns)
+                X = fill_missing_values(X, data)  # Fill any missing values with original data samples
+            else:
+                X = data.drop(columns=[col]).sample(n=1)
+            new_sample[col] = synthesize_data_linear(models[col], X)[0]
+            # Round the predictions to make them whole numbers
+            new_sample[col] = int(np.round(synthesize_data_linear(models[col], X)[0]))
+        
+        # Append the new sample row to the synthetic data DataFrame using pd.concat
+        synthetic_data = pd.concat([synthetic_data, pd.DataFrame([new_sample])], ignore_index=True)
+    
+    return synthetic_data
+
+
 def synthesise(data, method):
     if method == "CART":
         dataset = data.values
@@ -231,21 +319,8 @@ def synthesise(data, method):
      "Outcome":random.choices(data["Outcome"], k=n)
      })
     if method == "Linear/Logistic Regression":
-        data = data[["Sex", "Race", "Treatment", "Outcome"]]
-        spop = Synthpop(syn_method='logreg') 
-        dtypes = None
-        spop.fit(data, dtypes)
-        num_rows = len(data)
-        synth_data_log = spop.generate(k=num_rows)
-
-        data = data["Age"]
-        spop = Synthpop(syn_method='lm') 
-        dtypes = None
-        spop.fit(data, dtypes)
-        num_rows = len(data)
-        synth_data_lin = spop.generate(k=num_rows)
-
-        return pd.merge(synth_data_log, synth_data_lin, left_index = True, right_index = True)
+       synth_data = create_synthetic_data(data, num_samples=8)
+       return synth_data
     
 def synthesise_clicked(data, method):
     st.session_state["synthesise_clicked"] = True
