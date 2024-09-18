@@ -6,7 +6,7 @@ import pandas as pd
 
 import random
 
-from synthpop import Synthpop
+
 
 import matplotlib.pyplot as plt
 
