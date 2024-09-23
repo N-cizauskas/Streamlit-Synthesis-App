@@ -622,3 +622,79 @@ with tab1:
 
         image = Image.open('bar_chart_race.png')
         st.image(image)
+
+with tab2:
+    new_title = '<p style="font-size: 35px;"><strong style="font-weight: 900;">Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data</strong></p>'
+
+    st.markdown(new_title, unsafe_allow_html=True)
+    #st.title("Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data") # main title
+
+    st.header('What is Synthetic Data?')
+    st.subheader('Synthetic Data')
+    st.write('Synthetic Data widely refers to data that is artifically generated, and not measured through real-world events.')
+    st.subheader('Synthetic Data for Clinical Trials')
+    st.write('Synthetic data can be implemented in clinical trials through the use of synthetic control arms. Synthetic control arms are control groups generated based on real-world patient data with similar attributes to the experimental group (11). They are typically designed based on previous clinical trial data, observational study data, or external data (12). ')
+    st.subheader('Synthetic Data VS Simulated Data')
+    st.write('Colloquially, synthetic data is algorithmic and data-driven in its generation and simulated data requires specific real-world characteristics to frame the data such as probabilities of key variables (27).')
+
+
+    st.header('Why are Synthetic Controls Useful for Clinical Trials?')
+    st.subheader('Rare Diseases')
+    st.write('Synthetic control arms are particularly useful in randomized control trials (RCTs) that would otherwise be restricted by participant recruitment, cost, or ethics (10,13) - such as rare disease clinical trials. These synthetic control arms can cut the number of participants required to run an RCT by providing data to represent the control or placebo group. This also solves the problem  of ethics in cases where giving participants the control or placebo could be detrimental to their health.')
+    st.subheader('Cost Reduction')
+    st.write('Synthetic control arms can also be used to reduce the cost of otherwise expensive to run clinical trials by reducing the amount of real participants needed.')
+
+
+
+    st.header('What Types of Synthetic Data are There?')
+    st.subheader('Methods')
+    st.write('There are many ways of generating new data. One of the most popular methods for generating synthetic data is CART (classification and regression trees). In the virtual synthesizer, random sampling and linear/logistic regression were also available. This is because CART is a nonparametric model and linear/logistic regression modelling is a parametric model. Random sampling provides a "control" method to compare to.  A reminder of the definitions of each method can be found below:')
+    st.markdown("- CART: a decision tree that can create a new dataset by recursively partitioning the data based on feature splits and then assigning synthetic values to new points using the statistical properties of the data in each terminal leaf node")
+    st.markdown("- Random sampling: selects data points at random from each column in the original data until a new dataset of the desired size is formed")
+    st.markdown("- Linear/logistic regression: uses models trained on the original dataset to generate a new dataset by predicting continuous and categorical variables (via linear regression) and binary variables (via logistic regression) based on relationships learned from the original data")
+    st.subheader('Data Types')
+    st.write('There are three main types of data that can be used to create synthetic controls: RCT data, observational study data, and external data.')
+    st.write('RCTs are the gold standard of clinical research (1–3). By randomly sorting participants into two or more groups and assigning one for each treatment and one placebo or standard of care, a study reduces the influence of biases and confounding factors. RCTs are typically required for treatment and drug approval (2). Well-powered RCTs require a larger number of participants than single-arm studies due to the random allocation of participants into two independent groups. RCTs can be time-consuming and costly to run compared to other trial methodologies (1).')
+    st.write('A clinical observational study is any study where the researcher does not intervene in the result and simply collects data. These studies are often used to provide evidence of an association between a variable and disease of interest (4). There are multiple types of observational studies, including cross-sectional studies and case-control studies (5). In cohort studies, a study population is selected before any cases of the disease of interest are identified within the group, with participants being either exposed or unexposed to the variable being researched. This population is followed for a certain length of time, and cases and controls are identified and analysed later. In a cross-sectional study, a group of many different patient types (case, control, exposed, unexposed) are identified and data is collected on them once, at the same time. In a case-control study, cases and controls are identified and form two groups. Exposure to the variable of interest is measured after the identification of the cases and controls.')  
+    st.write('External data is any data that was collected from sources other than the relevant party. It can include consumer purchasing habits, digital activity, weather forecasts, and any other publicly available information (6). When used in clinical trials, external data often refers to data collected by hospitals or other healthcare institutions, large surveys, census data, electronic health records, or registries (7,8). These sources of information are also referred to as Real-World Data (RWD) (9,10). External data can have many levels, from population-level statistics to patient-level information. ')
+
+
+    st.header('How Does Using Different Data Types Impact the Quality of Synthetic Data in Clinical Trials?')
+    st.subheader('The Answer')
+    st.write('')
+    st.subheader('My Project')
+    st.write('')
+
+
+
+    st.header('How Can Synthetic Data Quality be Measured and Compared?')
+    st.subheader('Standard Mean Difference')
+    st.write('')
+    st.subheader('Treatment Effect Maintenance')
+    st.write('')
+
+
+
+    st.header('Why is this Important for Researchers?')
+    st.subheader('The Past')
+    st.write('')
+    st.subheader('The Future')
+    st.write('')
+
+
+
+    st.header('Want to Know More About my Study?')
+    st.subheader('Of Course You Do!')
+    st.subheader('Methods')
+    st.write('')
+    st.subheader('Results so Far')
+    st.write('')
+    st.subheader('What it Means')
+    st.write('')
+    st.subheader('What is Left to do')
+    st.write('')
+
+    st.header('References')
+
+
+#with tab3:
