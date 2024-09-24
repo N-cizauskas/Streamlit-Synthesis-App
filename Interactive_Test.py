@@ -631,7 +631,7 @@ with tab2:
 
     st.header('What is Synthetic Data?')
     st.subheader('Synthetic Data')
-    st.write('Synthetic Data widely refers to data that is artifically generated, and not measured through real-world events.')
+    st.write('Synthetic data widely refers to data that is artifically generated, and not measured through real-world events.')
     st.subheader('Synthetic Data for Clinical Trials')
     st.write('Synthetic data can be implemented in clinical trials through the use of synthetic control arms. Synthetic control arms are control groups generated based on real-world patient data with similar attributes to the experimental group (11). They are typically designed based on previous clinical trial data, observational study data, or external data (12). ')
     st.subheader('Synthetic Data VS Simulated Data')
@@ -655,35 +655,35 @@ with tab2:
     st.subheader('Data Types')
     st.write('There are three main types of data that can be used to create synthetic controls: RCT data, observational study data, and external data.')
     st.write('RCTs are the gold standard of clinical research (1–3). By randomly sorting participants into two or more groups and assigning one for each treatment and one placebo or standard of care, a study reduces the influence of biases and confounding factors. RCTs are typically required for treatment and drug approval (2). Well-powered RCTs require a larger number of participants than single-arm studies due to the random allocation of participants into two independent groups. RCTs can be time-consuming and costly to run compared to other trial methodologies (1).')
-    st.write('A clinical observational study is any study where the researcher does not intervene in the result and simply collects data. These studies are often used to provide evidence of an association between a variable and disease of interest (4). There are multiple types of observational studies, including cross-sectional studies and case-control studies (5). In cohort studies, a study population is selected before any cases of the disease of interest are identified within the group, with participants being either exposed or unexposed to the variable being researched. This population is followed for a certain length of time, and cases and controls are identified and analysed later. In a cross-sectional study, a group of many different patient types (case, control, exposed, unexposed) are identified and data is collected on them once, at the same time. In a case-control study, cases and controls are identified and form two groups. Exposure to the variable of interest is measured after the identification of the cases and controls.')  
+    st.write('A clinical observational study is any study where the researcher does not intervene in the result and simply collects data. These studies are often used to provide evidence of an association between a variable and disease of interest (4). There are multiple types of observational studies, including cross-sectional studies and case-control studies (5).')  
     st.write('External data is any data that was collected from sources other than the relevant party. It can include consumer purchasing habits, digital activity, weather forecasts, and any other publicly available information (6). When used in clinical trials, external data often refers to data collected by hospitals or other healthcare institutions, large surveys, census data, electronic health records, or registries (7,8). These sources of information are also referred to as Real-World Data (RWD) (9,10). External data can have many levels, from population-level statistics to patient-level information. ')
 
 
     st.header('How Does Using Different Data Types Impact the Quality of Synthetic Data in Clinical Trials?')
     st.subheader('The Answer')
-    st.write('')
+    st.write("We don't know.")
     st.subheader('My Project')
-    st.write('')
+    st.write('The aim of my project is to determine the difference in quality, if any, between synthetic data created from different types of clinical data. These three data types may not produce equal quality of synthetic controls, with RCTs hypothesized to produce a much higher quality (12). However, no research has measured the difference in quality of the synthetic controls produced by these methods. ')
 
 
 
     st.header('How Can Synthetic Data Quality be Measured and Compared?')
     st.subheader('Standard Mean Difference')
-    st.write('')
+    st.write('The standardized mean difference (SMD) measures how closely the synthetic data matches the original data. A SMD of 0 means that there is no difference between datasets and the range of a SMD can be from -1 to 1. Small SMD values are between 0.2-0.5, medium SMD values are between 0.5-0.8, and large SMD values are greater than 0.8.')
     st.subheader('Treatment Effect Maintenance')
-    st.write('')
+    st.write('Treatment effect maintenance includes measuring whether a treatment effect analysis using the synthetic data would produce the same results as one using the original data. For example, if the treatment and outcome are both binary, a chi-squared test can be used to determine the treatment effect for each dataset.  If the treatment effect is maintained, we would expect to see a similar significance level in both chi-squared tests.')
 
 
 
     st.header('Why is this Important for Researchers?')
     st.subheader('The Past')
-    st.write('')
+    st.write('Successful studies have been approved using synthetic controls generated from all three types of data in the past (14,16–18). However, there is currently no way of understanding the difference in data quality between these studies. ')
     st.subheader('The Future')
-    st.write('')
+    st.write('It is important to know whether the difference in quality is statistically significant, and by how much, so that future models can balance the need for hard-to-get RCT data with an appropriate estimation of how much better it is in producing quality synthetic data than observational data or external data.')
 
 
 
-    st.header('Want to Know More About my Study?')
+    st.header('Want to Know More About my Current Study?')
     st.subheader('Of Course You Do!')
     st.subheader('Methods')
     st.write('')
@@ -697,4 +697,18 @@ with tab2:
     st.header('References')
 
 
-#with tab3:
+with tab3:
+    new_title = '<p style="font-size: 35px;"><strong style="font-weight: 900;">About Me!</strong></p>'
+
+    st.markdown(new_title, unsafe_allow_html=True)
+    st.write('This is me! Please come ask me questions about my work if you see me around!')
+    image = Image.open('me.jpg')
+    st.image(image)
+    st.write('(she/her)')
+    st.subheader('Current Position')
+    st.write('Nicole Cizauskas')
+    st.write('Newcastle University, PGR')
+    st.write('Biostatistics Research Group')
+    st.subheader('Contact Me:')
+    st.write('Email: n.cizauskas@newcastle.ac.uk')
+    st.write('Github: https://github.com/N-cizauskas')
