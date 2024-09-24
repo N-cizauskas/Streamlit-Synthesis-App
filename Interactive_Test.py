@@ -703,6 +703,9 @@ with tab3:
     st.markdown(new_title, unsafe_allow_html=True)
     st.write('This is me! Please come ask me questions about my work if you see me around!')
     image = Image.open('me.jpg')
+    # Resize the image
+    new_size = (300, 300)  # Width, Height
+    image = image.resize(new_size)
     st.image(image)
     st.write('(she/her)')
     st.subheader('Current Position')
