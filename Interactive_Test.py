@@ -684,15 +684,66 @@ with tab2:
 
 
     st.header('Want to Know More About my Current Study?')
-    st.subheader('Of Course You Do!')
-    st.subheader('Methods')
-    st.write('')
+    st.write('Of Course You Do!')
+    st.subheader('Data Sources')
+    st.write('Data was simulated using the programming language R to reflect the distributions and ranges expected from external data, observational studies, and RCTs. Simulated datasets took the place of “real” data, and be compared to synthetic data as if it were such.  COVID-19 data is used as a case study to illustrate the differences between data type, chosen based on data availability.')
+    st.write('The outcome and intervention set looked at was testing positive for COVID-19 and the efficacy of the BNT162b2 mRNA vaccine. Data comes from February-August 2021 in the United Kingdom. In RCTs and observational studies, vaccine efficacy was looked at after 10 days following the intervention. Demographic confounders, such as sex, race, and age were incorporated into the analyses based on statistics of COVID-19 data in the UK (21). The trials and data used in the simulations were early after the initial rollout of the vaccine in 2021. RCT data was based on probabilities from a systematic review and meta-analysis (22). Observational study data was based on probabilities from an early vaccination efficacy study on older adults in England (23). External data probabilities were devised from statistics of vaccination rates from the National Health Service in England (24) and accounts of COVID-19 test results from England (25).  ')
+    
+    st.subheader('Synthpop')
+    st.write('Synthpop is an R packaged designed to create synthetic data from input datasets (28). The process of using synthpop in this study has three steps: ')
+    st.markdown('- Preparing the data for synthesis ')
+    st.markdown('- Synthesizing new data')
+    st.markdown('- Comparing the synthetic data')
+    st.write('In the first step, three datasets (external, observational, and RCT) are cleaned so that they have similarly named matching variables to each other. All datasets have an outcome variable, an exposure/treatment variable, and certain demographic variables. ')
+    st.write('Next, the data is synthesized using synthpop. CART modelling is used as the default, but other models are compared within the sensitivity analyses. A new, synthetic dataset is formed for each data type at the end of this step. ')
+    st.write('The final step compares each synthetic dataset to synthetic datasets of other types as well as the original data. Distributions of each variable are compared, and a boxplot is created to visualize the standard mean difference of the simulated datasets to the synthetic datasets. ')
+  
+    st.subheader('Selection of Characteristics')
+    st.write('The outcome will differ depending on the disease or treatment of interest in each study, and therefore it is important to keep the labelling of the treatment/exposure and outcome generic within the data. Demographic characteristics are selected based on availability; all studies must have the same characteristics to be compared. Sex, race, and age were selected based on this metric. The categories included in race differ based on the trial and were therefore simplified to the four main groups presented in the external data: Asian/Asian British, Black/Black British, Mixed race, and White. ')
+    st.subheader('Sample Size Selection')
+    st.write('Having a robust sample size is a crucial aspect of generating accurate synthetic data (12). To mitigate the influence of sample size on the quality of synthetic data produced in this study, simulated studies will be generated three times using three different sample sizes. A generic sample size of 20,000 observations will be created for all data types first. A smaller sample size of 100 observations will also be created for all data types. A third version of the simulations of each data type will be created with a “realistic” sample size based off the original data source. It is expected that RCT data type simulations will have significantly less observations in this version than observational studies or external data. The purpose of doing this is to measure whether there is a change in the quality of synthetic data generated from generic or realistic sample size simulations. Two versions of the generic sample size (100 and 20,000) are used to detect any differences in synthetic data quality change between data types at different sampling amounts. ')
+    st.write('These sample sizes form the four scenarios used within the simulation and synthesis: ')
+    st.markdown('- Scenario 1: n = 100 ')
+    st.markdown('- Scenario 2: n = 20,000 ')
+    st.markdown('- Scenario 3: realistic sample sizes (RCT: n = 18,575; Observational: n = 156, 930; External: n = 20,248,632')
+    st.markdown('- Scenario 4: n = 100 in simulated datasets, n = 20,000 in synthetic datasets ')
+    st.write('Simulations will be run 10,000 times for each sample size scenario. ')
+
     st.subheader('Results so Far')
-    st.write('')
+    st.write('CART method:')
+    st.write('The SMD of all variables did not show any significance difference between the simulated data and the synthetic data. This was true across all data types and all scenarios. A boxplot of the results can be seen in Figure 1.')
+    image = Image.open('CART_results.png')
+    st.image(image)
+    st.write('Figure 1: These boxplots show the standard mean difference between the simulated and synthetic data for each measured variable. The boxplots are separated by scenario, with each scenario corresponding to a specified sample size. Each variable has three boxes for different data types, with white being RCT, pink being observational, and grey being external data.')
+
+
+    st.write('Random sampling method:')
+    st.write('The SMD of all variables did not show any significant difference between the simulated data and the synthetic data. This was true across all data types and all scenarios. A boxplot of the results can be seen in Figure 2.')
+    image = Image.open('RS_results.png')
+    st.image(image)
+    st.write('Figure 2: These boxplots show the standard mean difference between the simulated and synthetic data for each measured variable. The boxplots are separated by scenario, with each scenario corresponding to a specified sample size. Each variable has three boxes for different data types, with white being RCT, pink being observational, and grey being external data.')
+   
+
+
+
+    st.write('Linear/logistic regression method:')
+    st.write('The SMD of all variables did not show any significance difference between the simulated data and the synthetic data. This was true across all data types and all scenarios. A boxplot of the results can be seen in Figure 3.')
+    image = Image.open('LL_results.png')
+    st.image(image)
+    st.write('Figure 3: These boxplots show the standard mean difference between the simulated and synthetic data for each measured variable. The boxplots are separated by scenario, with each scenario corresponding to a specified sample size. Each variable has three boxes for different data types, with white being RCT, pink being observational, and grey being external data.')
+    
+    
+
+    st.write('More results coming soon!')
+
+
+
     st.subheader('What it Means')
-    st.write('')
+    st.write('Preliminary results do not show significant differences in SMD between data types. SMD is used to measure the data replicability of the synthetic data; in this way, all three data types are showing high quality synthetic data in every scenario and for all tested synthesis methods.')
+    st.write('This is a case study of a single disease, and these results are not representative of all clinical trials.')
+    st.write('There are several limitations of the study that should be mentioned. The main weakness of the synthesis methods is the computational power and time required to run the simulation study and synthetic data generation at an appropriate number of simulations (N = 10,000 for each scenario) Due to having four different sample size scenarios and three methods tested, the total number of simulations run was 120,000. The choice of COVID-19 as an outcome in the simulation study was not representative of other disease outcomes. While originally picked due to the wide availability of all three data types, it is now apparent that the sample sizes for all three data types are inflated compared to other diseases. This primarily affects the treatment effect estimations and the realistic sample size scenario.')
     st.subheader('What is Left to do')
-    st.write('')
+    st.write('So far, this is a case study on a specific treatment and outcome. To confirm these findings, more research will need to be done on other diseases and treatments.')
 
     st.header('References')
 
@@ -710,7 +761,7 @@ with tab3:
     st.write('(she/her)')
     st.subheader('Current Position')
     st.write('Nicole Cizauskas')
-    st.write('Newcastle University, PGR')
+    st.write('Newcastle University, PGR in Biostatistics')
     st.write('Biostatistics Research Group')
     st.subheader('Contact Me:')
     st.write('Email: n.cizauskas@newcastle.ac.uk')
