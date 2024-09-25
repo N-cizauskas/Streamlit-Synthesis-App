@@ -624,10 +624,10 @@ with tab1:
         st.image(image)
 
 with tab2:
-    new_title = '<p style="font-size: 35px;"><strong style="font-weight: 900;">Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data</strong></p>'
+    #new_title = '<p style="font-size: 35px;"><strong style="font-weight: 900;">Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data</strong></p>'
 
-    st.markdown(new_title, unsafe_allow_html=True)
-    #st.title("Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data") # main title
+    #st.markdown(new_title, unsafe_allow_html=True)
+    st.title("Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data") # main title
 
     st.header('What is Synthetic Data?')
     st.subheader('Synthetic Data')
