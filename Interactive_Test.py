@@ -633,14 +633,14 @@ with tab2:
     st.subheader('Synthetic Data')
     st.write('Synthetic data widely refers to data that is artifically generated, and not measured through real-world events.')
     st.subheader('Synthetic Data for Clinical Trials')
-    st.write('Synthetic data can be implemented in clinical trials through the use of synthetic control arms. Synthetic control arms are control groups generated based on real-world patient data with similar attributes to the experimental group (11). They are typically designed based on previous clinical trial data, observational study data, or external data (12). ')
+    st.write('Synthetic data can be implemented in clinical trials through the use of synthetic control arms. Synthetic control arms are control groups generated based on real-world patient data with similar attributes to the experimental group (1). They are typically designed based on previous clinical trial data, observational study data, or external data (2). ')
     st.subheader('Synthetic Data VS Simulated Data')
-    st.write('Colloquially, synthetic data is algorithmic and data-driven in its generation and simulated data requires specific real-world characteristics to frame the data such as probabilities of key variables (27).')
+    st.write('Colloquially, synthetic data is algorithmic and data-driven in its generation and simulated data requires specific real-world characteristics to frame the data such as probabilities of key variables (3).')
 
 
     st.header('Why are Synthetic Controls Useful for Clinical Trials?')
     st.subheader('Rare Diseases')
-    st.write('Synthetic control arms are particularly useful in randomized control trials (RCTs) that would otherwise be restricted by participant recruitment, cost, or ethics (10,13) - such as rare disease clinical trials. These synthetic control arms can cut the number of participants required to run an RCT by providing data to represent the control or placebo group. This also solves the problem  of ethics in cases where giving participants the control or placebo could be detrimental to their health.')
+    st.write('Synthetic control arms are particularly useful in randomized control trials (RCTs) that would otherwise be restricted by participant recruitment, cost, or ethics (4,5) - such as rare disease clinical trials. These synthetic control arms can cut the number of participants required to run an RCT by providing data to represent the control or placebo group. This also solves the problem  of ethics in cases where giving participants the control or placebo could be detrimental to their health.')
     st.subheader('Cost Reduction')
     st.write('Synthetic control arms can also be used to reduce the cost of otherwise expensive to run clinical trials by reducing the amount of real participants needed.')
 
@@ -654,16 +654,16 @@ with tab2:
     st.markdown("- Linear/logistic regression: uses models trained on the original dataset to generate a new dataset by predicting continuous and categorical variables (via linear regression) and binary variables (via logistic regression) based on relationships learned from the original data")
     st.subheader('Data Types')
     st.write('There are three main types of data that can be used to create synthetic controls: RCT data, observational study data, and external data.')
-    st.write('RCTs are the gold standard of clinical research (1–3). By randomly sorting participants into two or more groups and assigning one for each treatment and one placebo or standard of care, a study reduces the influence of biases and confounding factors. RCTs are typically required for treatment and drug approval (2). Well-powered RCTs require a larger number of participants than single-arm studies due to the random allocation of participants into two independent groups. RCTs can be time-consuming and costly to run compared to other trial methodologies (1).')
-    st.write('A clinical observational study is any study where the researcher does not intervene in the result and simply collects data. These studies are often used to provide evidence of an association between a variable and disease of interest (4). There are multiple types of observational studies, including cross-sectional studies and case-control studies (5).')  
-    st.write('External data is any data that was collected from sources other than the relevant party. It can include consumer purchasing habits, digital activity, weather forecasts, and any other publicly available information (6). When used in clinical trials, external data often refers to data collected by hospitals or other healthcare institutions, large surveys, census data, electronic health records, or registries (7,8). These sources of information are also referred to as Real-World Data (RWD) (9,10). External data can have many levels, from population-level statistics to patient-level information. ')
+    st.write('RCTs are the gold standard of clinical research (6-8). By randomly sorting participants into two or more groups and assigning one for each treatment and one placebo or standard of care, a study reduces the influence of biases and confounding factors. RCTs are typically required for treatment and drug approval (2). Well-powered RCTs require a larger number of participants than single-arm studies due to the random allocation of participants into two independent groups. RCTs can be time-consuming and costly to run compared to other trial methodologies (1).')
+    st.write('A clinical observational study is any study where the researcher does not intervene in the result and simply collects data. These studies are often used to provide evidence of an association between a variable and disease of interest (9). There are multiple types of observational studies, including cross-sectional studies and case-control studies (10).')  
+    st.write('External data is any data that was collected from sources other than the relevant party. It can include consumer purchasing habits, digital activity, weather forecasts, and any other publicly available information (11). When used in clinical trials, external data often refers to data collected by hospitals or other healthcare institutions, large surveys, census data, electronic health records, or registries (7,8). These sources of information are also referred to as Real-World Data (RWD) (9,10). External data can have many levels, from population-level statistics to patient-level information. ')
 
 
     st.header('How Does Using Different Data Types Impact the Quality of Synthetic Data in Clinical Trials?')
     st.subheader('The Answer')
     st.write("We don't know.")
     st.subheader('My Project')
-    st.write('The aim of my project is to determine the difference in quality, if any, between synthetic data created from different types of clinical data. These three data types may not produce equal quality of synthetic controls, with RCTs hypothesized to produce a much higher quality (12). However, no research has measured the difference in quality of the synthetic controls produced by these methods. ')
+    st.write('The aim of my project is to determine the difference in quality, if any, between synthetic data created from different types of clinical data. These three data types may not produce equal quality of synthetic controls, with RCTs hypothesized to produce a much higher quality (2). However, no research has measured the difference in quality of the synthetic controls produced by these methods. ')
 
 
 
@@ -746,6 +746,33 @@ with tab2:
     st.write('So far, this is a case study on a specific treatment and outcome. To confirm these findings, more research will need to be done on other diseases and treatments.')
 
     st.header('References')
+    st.markdown("""
+1. Bouttell J, Craig P, Lewsey J, Robinson M, Popham F. Synthetic control methodology as a tool for evaluating population-level health interventions. J Epidemiol Community Health. 2018 Aug 1;72(8):673–8. 
+2. Thorlund K, Dron L, Park JJH, Mills EJ. Synthetic and External Controls in Clinical Trials – A Primer for Researchers. Clin Epidemiol. 2020 May 8;12:457–67. 
+3. Ali Awan A. What is Synthetic Data? [Internet]. 2023 [cited 2024 Feb 28]. Available from: https://www.datacamp.com/blog/what-is-synthetic-data
+4. Lyman JP, Doucette A, Zheng-Lin B, Cabanski CR, Maloy MA, Bayless NL, et al. Feasibility and utility of synthetic control arms derived from real-world data to support clinical development. J Clin Oncol. 2022 Feb;40(4_suppl):528–528. 
+5. Goldsack J. Synthetic control arms can save time and money in clinical trials [Internet]. STAT. 2019 [cited 2023 Oct 2]. Available from: https://www.statnews.com/2019/02/05/synthetic-control-arms-clinical-trials/
+6. Sibbald B, Roland M. Understanding controlled trials: Why are randomised controlled trials important? BMJ. 1998 Jan 17;316(7126):201. 
+7. Akobeng AK. Understanding randomised controlled trials. Arch Dis Child. 2005 Aug 1;90(8):840–4.
+8. Hariton E, Locascio JJ. Randomised controlled trials—the gold standard for effectiveness research. BJOG Int J Obstet Gynaecol. 2018 Dec;125(13):1716. 
+9. University College London. MRC Clinical Trials Unit at UCL. 2018 [cited 2024 Feb 19]. What is an observational study? Available from: https://www.mrcctu.ucl.ac.uk/patients-public/about-clinical-trials/what-is-an-observational-study/
+10. Song JW, Chung KC. Observational Studies: Cohort and Case-Control Studies. Plast Reconstr Surg. 2010 Dec;126(6):2234–42
+11. Aaser M, McElhaney D. Harnessing the power of external data. McKinsey Digit. 2021;
+12. Burger HU, Gerlinger C, Harbron C, Koch A, Posch M, Rochon J, et al. The use of external controls: To what extent can it currently be recommended? Pharm Stat. 2021;20(6):1002–16. 
+13. Chevret S, Timsit JF, Biard L. Challenges of using external data in clinical trials- an illustration in patients with COVID-19. BMC Med Res Methodol. 2022 Dec 15;22(1):321. 
+14. Burcu M, Dreyer NA, Franklin JM, Blum MD, Critchlow CW, Perfetto EM, et al. Real-world evidence to support regulatory decision-making for medicines: Considerations for external control arms. Pharmacoepidemiol Drug Saf. 2020;29(10):1228–35. 
+15. Lyman JP, Doucette A, Zheng-Lin B, Cabanski CR, Maloy MA, Bayless NL, et al. Feasibility and utility of synthetic control arms derived from real-world data to support clinical development. J Clin Oncol. 2022 Feb;40(4_suppl):528–528. 
+16. Commissioner O of the. FDA. FDA; 2020 [cited 2023 Oct 2]. Statement from FDA Commissioner Scott Gottlieb, M.D., on FDA’s new strategic framework to advance use of real-world evidence to support development of drugs and biologics. Available from: https://www.fda.gov/news-events/press-announcements/statement-fda-commissioner-scott-gottlieb-md-fdas-new-strategic-framework-advance-use-real-world
+17. Berry DA, Elashoff M, Blotner S, Davi R, Beineke P, Chandler M, et al. Creating a synthetic control arm from previous clinical trials: Application to establishing early end points as indicators of overall survival in acute myeloid leukemia (AML). J Clin Oncol. 2017 May 20;35(15_suppl):7021–7021. 
+18. Blondeau K, Schneider A, Ngwa I. A synthetic control arm from observational data to estimate the background incidence rate of an adverse event in patients with Alzheimer’s disease matched to a clinical trial population. Alzheimers Dement. 2020;16(S10):e043657. 
+19. Ko YA, Chen Z, Liu C, Hu Y, Quyyumi AA, Waller LA, et al. Developing a synthetic control group using electronic health records: Application to a single-arm lifestyle intervention study. Prev Med Rep. 2021 Dec 1;24:101572.
+20. GOV.UK. GOV.UK. 2021 [cited 2024 Mar 8]. Demographic data for coronavirus (COVID-19) testing (England): 28 May to 26 August. Available from: https://www.gov.uk/government/publications/demographic-data-for-coronavirus-testing-england-28-may-to-26-august/demographic-data-for-coronavirus-covid-19-testing-england-28-may-to-26-august
+21. Yang ZR, Jiang YW, Li FX, Liu D, Lin TF, Zhao ZY, et al. Efficacy of SARS-CoV-2 vaccines and the dose–response relationship with three major antibodies: a systematic review and meta-analysis of randomised controlled trials. Lancet Microbe. 2023 Apr 1;4(4):e236–46. 
+22. Bernal JL, Andrews N, Gower C, Stowe J, Robertson C, Tessier E, et al. Early effectiveness of COVID-19 vaccination with BNT162b2 mRNA vaccine and ChAdOx1 adenovirus vector vaccine on symptomatic disease, hospitalisations and mortality in older adults in England [Internet]. medRxiv; 2021 [cited 2024 Feb 26]. p. 2021.03.01.21252652. Available from: https://www.medrxiv.org/content/10.1101/2021.03.01.21252652v1              
+23. NHS. COVID-19 Vaccinations Archive [Internet]. 2021 [cited 2024 Feb 28]. Available from: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-vaccinations/covid-19-vaccinations-archive/
+24. GOV.UK. Cases in England | Coronavirus in the UK [Internet]. 2021 [cited 2024 Feb 28]. Available from: https://coronavirus.data.gov.uk/details/cases?areaType=nation&areaName=England
+25. Nowok B, Raab GM, Dibben C. synthpop: Bespoke Creation of Synthetic Data in R. J Stat Softw. 2016 Oct 28;74:1–26.
+""")
 
 
 with tab3:
