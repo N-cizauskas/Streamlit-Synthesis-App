@@ -18,6 +18,9 @@ from sklearn.linear_model import LinearRegression, LogisticRegression
 
 from datetime import datetime
 
+import gspread
+
+from oauth2client.service_account import ServiceAccountCredentials
 
 tab1, tab2, tab3, tab4 = st.tabs(["Virtual Synthesizer", "About my Project", "About Me", "Leave Feedback"])
 
@@ -796,20 +799,42 @@ with tab3:
     st.write('Github: https://github.com/N-cizauskas')
 
 with tab4:
+
+    # Define the scope for accessing Google Sheets and Google Drive
+    scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+
+    # Load credentials from Streamlit secrets
+    credentials_info = st.secrets["google_sheets"]
+
+    # Authorize the client using the credentials from secrets
+    credentials = ServiceAccountCredentials.from_json_keyfile_dict(credentials_info, scope)
+    client = gspread.authorize(credentials)
+
+    # Open your Google Sheet
+    sheet = client.open("Feedback").sheet1
+
+    # Streamlit app to collect feedback
     st.header('Feedback Form')
     st.write('I would love to hear your thoughts on this app, my poster, or any of my work!')
 
-    # text box
     feedback = st.text_area("Enter your comments or feedback here:")
 
-    # save to csv when submitted
     if st.button("Submit"):
-        st.write("Thank you for your feedback!")
-        st.write(f"Your feedback: {feedback}")
+        if feedback:
+        # Append the feedback and a timestamp to the Google Sheet
+            sheet.append_row([feedback, str(datetime.now())])
+            st.write("Thank you for your feedback!")
+        else:
+            st.write("Please enter your feedback before submitting.")
 
-    # save feedback in df
-    feedback_data = pd.DataFrame({
-        'feedback': [feedback],
-        'timestamp': [datetime.now()]
-    })
-    feedback_data.to_csv('feedback.csv', mode='a', header=False, index=False)
+    
+   
+
+
+
+
+
+
+
+
+
