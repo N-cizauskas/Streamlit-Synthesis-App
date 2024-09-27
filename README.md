@@ -1,4 +1,4 @@
-# Comparing-Simulated-and-Synthetic-Data-Types
+# Streamlit Synthesis App
 
 
 ## Description
