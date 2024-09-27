@@ -16,9 +16,10 @@ import numpy as np
 
 from sklearn.linear_model import LinearRegression, LogisticRegression
 
+from datetime import datetime
 
 
-tab1, tab2, tab3 = st.tabs(["Virtual Synthesizer", "About my Project", "About Me"])
+tab1, tab2, tab3, tab4 = st.tabs(["Virtual Synthesizer", "About my Project", "About Me", "Leave Feedback"])
 
 
 with tab1:
@@ -793,3 +794,22 @@ with tab3:
     st.subheader('Contact Me:')
     st.write('Email: n.cizauskas@newcastle.ac.uk')
     st.write('Github: https://github.com/N-cizauskas')
+
+with tab4:
+    st.header('Feedback Form')
+    st.write('I would love to hear your thoughts on this app, my poster, or any of my work!')
+
+    # text box
+    feedback = st.text_area("Enter your comments or feedback here:")
+
+    # save to csv when submitted
+    if st.button("Submit"):
+        st.write("Thank you for your feedback!")
+        st.write(f"Your feedback: {feedback}")
+
+    # save feedback in df
+    feedback_data = pd.DataFrame({
+        'feedback': [feedback],
+        'timestamp': [datetime.now()]
+    })
+    feedback_data.to_csv('feedback.csv', mode='a', header=False, index=False)
