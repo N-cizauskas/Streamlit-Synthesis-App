@@ -817,14 +817,14 @@ with tab4:
     st.header('Feedback Form')
     st.write('I would love to hear your thoughts on this app, my poster, or any of my work!')
 
-    feedback = st.text_area("Enter your comments or feedback here:")
+    feedback = st.text_area("Enter your comments or feedback here:", key="widget")
 
     if st.button("Submit"):
         if feedback:
         # Append the feedback and a timestamp to the Google Sheet
             sheet.append_row([feedback, str(datetime.now())])
             st.write("Response submitted. Thank you for your feedback!")
-            feedback = st.text_area("Enter your comments or feedback here:")
+            st.session_state.widget = "Enter your comments or feedback here:"
         else:
             st.write("Please enter your feedback before submitting.")
 
