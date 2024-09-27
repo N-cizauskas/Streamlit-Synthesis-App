@@ -823,7 +823,8 @@ with tab4:
         if feedback:
         # Append the feedback and a timestamp to the Google Sheet
             sheet.append_row([feedback, str(datetime.now())])
-            st.write("Thank you for your feedback!")
+            st.write("Response submitted. Thank you for your feedback!")
+            feedback = st.text_area("Enter your comments or feedback here:")
         else:
             st.write("Please enter your feedback before submitting.")
 
