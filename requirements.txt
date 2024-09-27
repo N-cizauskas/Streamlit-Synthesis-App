@@ -6,3 +6,6 @@ pillow
 scikit-learn
 
 datetime
+
+gspread
+oauth2client.service_account
