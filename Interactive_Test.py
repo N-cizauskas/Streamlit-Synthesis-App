@@ -310,6 +310,12 @@ with tab1:
                 # round the predictions 
                 new_sample[col] = int(np.round(synthesize_data_linear(models[col], X)[0]))
             
+                 # Apply truncation for "Race" and "Age"
+                if col == "Race":
+                    new_sample[col] = np.clip(predicted_value, 1, 4)  # Ensure Race is between 1 and 4
+                elif col == "Age":
+                    new_sample[col] = np.clip(predicted_value, 10, 90)  # Ensure Age is between 10 and 90
+            
             # append the new sample row to the synthetic data 
             synthetic_data = pd.concat([synthetic_data, pd.DataFrame([new_sample])], ignore_index=True)
         
