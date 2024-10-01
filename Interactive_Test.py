@@ -322,8 +322,12 @@ with tab1:
                     new_sample[col] = np.clip(predicted_value, 10, 90)  # Ensure Age is between 10 and 90
                 else:
                     new_sample[col] = predicted_value  # For other continuous columns, just assign the rounded value
-        
-            # Append the new sample row to the synthetic data
+            
+                # Ensure no NA values are present after filling
+                new_sample[col] = new_sample[col] if pd.notna(new_sample[col]) else fill_missing_values(pd.DataFrame([new_sample]), data)[col].values[0]
+
+
+                # Append the new sample row to the synthetic data
                 synthetic_data = pd.concat([synthetic_data, pd.DataFrame([new_sample])], ignore_index=True)
 
         return synthetic_data
