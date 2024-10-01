@@ -328,7 +328,7 @@ with tab1:
 
 
                 # append new synthetic data 
-                synthetic_data = pd.concat([synthetic_data, pd.DataFrame([new_sample])], ignore_index=True)
+            synthetic_data = pd.concat([synthetic_data, pd.DataFrame([new_sample])], ignore_index=True)
 
         return synthetic_data
 
