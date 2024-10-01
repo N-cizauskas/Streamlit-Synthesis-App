@@ -300,25 +300,32 @@ with tab1:
                     X = data.drop(columns=[col]).sample(n=1)
                 new_sample[col] = int(synthesize_data_logistic(models[col], X)[0])
 
+           
+    
             for col in continuous_columns:
                 if new_sample:
                     X = pd.DataFrame([new_sample], columns=data.drop(columns=[col]).columns)
                     X = fill_missing_values(X, data)  # fill any missing values with original data samples
                 else:
                     X = data.drop(columns=[col]).sample(n=1)
-                new_sample[col] = synthesize_data_linear(models[col], X)[0]
-                # round the predictions 
-                new_sample[col] = int(np.round(synthesize_data_linear(models[col], X)[0]))
-            
-                 # Apply truncation for "Race" and "Age"
-                if col == "Race":
-                    new_sample[col] = np.clip(new_sample, 1, 4)  # Ensure Race is between 1 and 4
-                elif col == "Age":
-                    new_sample[col] = np.clip(new_sample, 10, 90)  # Ensure Age is between 10 and 90
-            
-            # append the new sample row to the synthetic data 
-            synthetic_data = pd.concat([synthetic_data, pd.DataFrame([new_sample])], ignore_index=True)
+
+                # Predict the continuous value
+                predicted_value = synthesize_data_linear(models[col], X)[0]
         
+                # Round the prediction to the nearest integer
+                predicted_value = int(np.round(predicted_value))
+        
+                # Apply truncation for "Race" and "Age"
+                if col == "Race":
+                    new_sample[col] = np.clip(predicted_value, 1, 4)  # Ensure Race is between 1 and 4
+                elif col == "Age":
+                    new_sample[col] = np.clip(predicted_value, 10, 90)  # Ensure Age is between 10 and 90
+                else:
+                    new_sample[col] = predicted_value  # For other continuous columns, just assign the rounded value
+        
+            # Append the new sample row to the synthetic data
+                synthetic_data = pd.concat([synthetic_data, pd.DataFrame([new_sample])], ignore_index=True)
+
         return synthetic_data
 
     # create the synthesize function with three methods as options
