@@ -22,10 +22,13 @@ import gspread
 
 from oauth2client.service_account import ServiceAccountCredentials
 
-tab1, tab2, tab3, tab4 = st.tabs(["Virtual Synthesizer", "About my Project", "About Me", "Leave Feedback"])
-
+tab1, tab2, tab3, tab4, tab5, tab6, tab7, tab8 = st.tabs(["Home", "Virtual Synthesizer", "What are Synthetic Controls?", "Synthetic Control Quality", "Bayesian VS Synthetic", "About Me", "Zines", "Leave Feedback"])
 
 with tab1:
+    st.title("Welcome to the World of Synthetic Controls!") # home page title
+    st.write("Please navigate using the tabs at the top.")
+    st.image("Home.gif")
+with tab2:
     # design page
     if "randomize_clicked" not in st.session_state:
         st.session_state["randomize_clicked"] = False
@@ -643,66 +646,47 @@ with tab1:
 
         image = Image.open('bar_chart_race.png')
         st.image(image)
-
-with tab2:
-    #new_title = '<p style="font-size: 35px;"><strong style="font-weight: 900;">Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data</strong></p>'
-
-    #st.markdown(new_title, unsafe_allow_html=True)
+with tab3:
+    st.title("What are Synthetic Controls?")
+    st.header("Synthetic Data")
+    st.subheader("Types of Synthetic Data")
+    st.write('Synthetic data widely refers to data that is artificially generated, and not measured through real-world events. Synthetic controls fall under the umbrella of synthetic data, along with similar (and overlapping) methods, such as digital twins. The diagram below shows some of the other definitions under the synthetic data umbrella.')
+    st.subheader("Synthetic Controls")
+    st.write("Synthetic data can used to substitute the control arm of a clinical randomized control trial (RCT). Synthetic control arms are generated based on external (to the study) patient data with similar attributes to the experimental group. They are designed based on historical RCTs, observational study data, or external data.")
+    st.header("Why are Synthetic Controls Useful?")
+    st.subheader("Participant Recruitment")
+    st.write("Synthetic control arms are useful for any RCT that would otherwise be restricted by participant recruitment.  This includes rare diseases and pediatric trials. Synthetic controls can reduce the number of participants needed to recruit by removing the need to allocate to the control arm.")
+    st.subheader("Cost and Speed")
+    st.write("Synthetic controls can reduce the cost and speed it takes to perform a RCT by reducing the number of participants needed to recruit. This is useful in specific circumstances that require a very fast, cheap trial – such as pandemics.")
+    st.subheader("Ethics")
+    st.write("Synthetic controls can also be used in cases where it is unethical to assign participants to the control group, such as situations where no current quality standard of care exists or the standard of care is expected to be significantly less effective based on proof of concept trials.")
+    st.header("Types of Synthetic Controls")
+    st.subheader("Data Sources")
+    st.write("Three different data sources can be used to create synthetic controls:")
+    st.markdown("- Historical RCTs with similar populations, demographics, and measured outcome")
+    st.markdown("- Observational or single-arm studies ")
+    st.markdown("- External data (e.g. electronic health records, routinely collected data, survey results)")
+    st.subheader("Synthesis Methods")
+    st.write("Synthetic controls can be generated from a variety of methods, including random sampling, linear and logistic regression, and machine learning techniques.")
+    st.subheader("Why Not Just use a Historical Control Arm?")
+    st.write("Some studies do use historical control arms in the place of a new or synthetic one. One downside of this are that you need to recollect participant consent to use their data in a new trial.  In addition to this, there are other benefits of using synthetic controls over historical ones. You can amplify characteristics of interest (i.e. age, sex) in your synthetic controls. You can also combine multiple data sources to create one synthetic control arm, resulting in a decrease of overall bias.")
+with tab4:
     st.title("Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data") # main title
-
-    st.header('What is Synthetic Data?')
-    st.subheader('Synthetic Data')
-    st.write('Synthetic data widely refers to data that is artifically generated, and not measured through real-world events.')
-    st.subheader('Synthetic Data for Clinical Trials')
-    st.write('Synthetic data can be implemented in clinical trials through the use of synthetic control arms. Synthetic control arms are control groups generated based on real-world patient data with similar attributes to the experimental group (1). They are typically designed based on previous clinical trial data, observational study data, or external data (2). ')
-    st.subheader('Synthetic Data VS Simulated Data')
-    st.write('Colloquially, synthetic data is algorithmic and data-driven in its generation and simulated data requires specific real-world characteristics to frame the data such as probabilities of key variables (3).')
-
-
-    st.header('Why are Synthetic Controls Useful for Clinical Trials?')
-    st.subheader('Rare Diseases')
-    st.write('Synthetic control arms are particularly useful in randomized control trials (RCTs) that would otherwise be restricted by participant recruitment, cost, or ethics (4,5) - such as rare disease clinical trials. These synthetic control arms can cut the number of participants required to run an RCT by providing data to represent the control or placebo group. This also solves the problem  of ethics in cases where giving participants the control or placebo could be detrimental to their health.')
-    st.subheader('Cost Reduction')
-    st.write('Synthetic control arms can also be used to reduce the cost of otherwise expensive to run clinical trials by reducing the amount of real participants needed.')
-
-
-
-    st.header('What Types of Synthetic Data are There?')
-    st.subheader('Methods')
-    st.write('There are many ways of generating new data. One of the most popular methods for generating synthetic data is CART (classification and regression trees). In the virtual synthesizer, random sampling and linear/logistic regression were also available. This is because CART is a nonparametric model and linear/logistic regression modelling is a parametric model. Random sampling provides a "control" method to compare to.  A reminder of the definitions of each method can be found below:')
-    st.markdown("- CART: a decision tree that can create a new dataset by recursively partitioning the data based on feature splits and then assigning synthetic values to new points using the statistical properties of the data in each terminal leaf node")
-    st.markdown("- Random sampling: selects data points at random from each column in the original data until a new dataset of the desired size is formed")
-    st.markdown("- Linear/logistic regression: uses models trained on the original dataset to generate a new dataset by predicting continuous and categorical variables (via linear regression) and binary variables (via logistic regression) based on relationships learned from the original data")
-    st.subheader('Data Types')
-    st.write('There are three main types of data that can be used to create synthetic controls: RCT data, observational study data, and external data.')
-    st.write('RCTs are the gold standard of clinical research (6-8). By randomly sorting participants into two or more groups and assigning one for each treatment and one placebo or standard of care, a study reduces the influence of biases and confounding factors. RCTs are typically required for treatment and drug approval (9). Well-powered RCTs require a larger number of participants than single-arm studies due to the random allocation of participants into two independent groups. RCTs can be time-consuming and costly to run compared to other trial methodologies (10).')
-    st.write('A clinical observational study is any study where the researcher does not intervene in the result and simply collects data. These studies are often used to provide evidence of an association between a variable and disease of interest (11). There are multiple types of observational studies, including cross-sectional studies and case-control studies (12).')  
-    st.write('External data is any data that was collected from sources other than the relevant party. It can include consumer purchasing habits, digital activity, weather forecasts, and any other publicly available information (13). When used in clinical trials, external data often refers to data collected by hospitals or other healthcare institutions, large surveys, census data, electronic health records, or registries (12,13). These sources of information are also referred to as Real-World Data (RWD) (14,15). External data can have many levels, from population-level statistics to patient-level information. ')
-
-
     st.header('How Does Using Different Data Types Impact the Quality of Synthetic Data in Clinical Trials?')
     st.subheader('The Answer')
     st.write("We don't know.")
     st.subheader('My Project')
     st.write('The aim of my project is to determine the difference in quality, if any, between synthetic data created from different types of clinical data. These three data types may not produce equal quality of synthetic controls, with RCTs hypothesized to produce a much higher quality (2). However, no research has measured the difference in quality of the synthetic controls produced by these methods. ')
-
-
-
     st.header('How Can Synthetic Data Quality be Measured and Compared?')
     st.subheader('Standard Mean Difference')
     st.write('The standardized mean difference (SMD) measures how closely the synthetic data matches the original data. A SMD of 0 means that there is no difference between datasets and the range of a SMD can be from -1 to 1. Small SMD values are between 0.2-0.5, medium SMD values are between 0.5-0.8, and large SMD values are greater than 0.8.')
     st.subheader('Treatment Effect Maintenance')
     st.write('Treatment effect maintenance includes measuring whether a treatment effect analysis using the synthetic data would produce the same results as one using the original data. For example, if the treatment and outcome are both binary, a chi-squared test can be used to determine the treatment effect for each dataset.  If the treatment effect is maintained, we would expect to see a similar significance level in both chi-squared tests.')
-
-
-
     st.header('Why is this Important for Researchers?')
     st.subheader('The Past')
     st.write('Successful studies have been approved using synthetic controls generated from all three types of data in the past (16-19). However, there is currently no way of understanding the difference in data quality between these studies. ')
     st.subheader('The Future')
     st.write('It is important to know whether the difference in quality is statistically significant, and by how much, so that future models can balance the need for hard-to-get RCT data with an appropriate estimation of how much better it is in producing quality synthetic data than observational data or external data.')
-
-
 
     st.header('Want to Know More About my Current Study?')
     st.write('Of Course You Do!')
@@ -795,8 +779,10 @@ with tab2:
 25. Nowok B, Raab GM, Dibben C. synthpop: Bespoke Creation of Synthetic Data in R. J Stat Softw. 2016 Oct 28;74:1–26.
 """)
 
+with tab5:
+    st.title("Differences in Quality of Bayesian Dynamic Borrowing and Synthetic Control Methods: A Case Study of Pediatric Atopic Dermatitis") # main title
 
-with tab3:
+with tab6:
     new_title = '<p style="font-size: 35px;"><strong style="font-weight: 900;">About Me!</strong></p>'
 
     st.markdown(new_title, unsafe_allow_html=True)
@@ -815,7 +801,9 @@ with tab3:
     st.write('Email: n.cizauskas@newcastle.ac.uk')
     st.write('Github: https://github.com/N-cizauskas')
 
-with tab4:
+with tab7:
+    st.title("Check Out My Zines!")
+with tab8:
 
     # Define the scope for accessing Google Sheets and Google Drive
     scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
@@ -832,7 +820,7 @@ with tab4:
 
     # Streamlit app to collect feedback
     st.header('Feedback Form')
-    st.write('I would love to hear your thoughts on this app, my poster, or any of my work!')
+    st.write('I would love to hear your thoughts on this app or any of my work!')
 
     feedback = st.text_area("Enter your comments or feedback here:")
 
