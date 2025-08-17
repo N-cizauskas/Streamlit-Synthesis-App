@@ -651,6 +651,7 @@ with tab3:
     st.header("Synthetic Data")
     st.subheader("Types of Synthetic Data")
     st.write('Synthetic data widely refers to data that is artificially generated, and not measured through real-world events. Synthetic controls fall under the umbrella of synthetic data, along with similar (and overlapping) methods, such as digital twins. The diagram below shows some of the other definitions under the synthetic data umbrella.')
+    st.image("names.png")
     st.subheader("Synthetic Controls")
     st.write("Synthetic data can used to substitute the control arm of a clinical randomized control trial (RCT). Synthetic control arms are generated based on external (to the study) patient data with similar attributes to the experimental group. They are designed based on historical RCTs, observational study data, or external data.")
     st.header("Why are Synthetic Controls Useful?")
@@ -671,85 +672,55 @@ with tab3:
     st.subheader("Why Not Just use a Historical Control Arm?")
     st.write("Some studies do use historical control arms in the place of a new or synthetic one. One downside of this are that you need to recollect participant consent to use their data in a new trial.  In addition to this, there are other benefits of using synthetic controls over historical ones. You can amplify characteristics of interest (i.e. age, sex) in your synthetic controls. You can also combine multiple data sources to create one synthetic control arm, resulting in a decrease of overall bias.")
 with tab4:
-    st.title("Analyzing Differences in Data Quality of Synthetic Data Generated from Randomized Control Trials, Observational Studies, and External Data") # main title
-    st.header('How Does Using Different Data Types Impact the Quality of Synthetic Data in Clinical Trials?')
-    st.subheader('The Answer')
+    st.title("Does the Data Source Used Affect the Quality of a Synthetic Control?") # main title
+    st.header("What We Know So Far")
+    st.subheader("Data Source Quality")
+    st.write("Previous studies have stated that there is a quality tradeoff in the choice of data source used to create a synthetic control, with RCTs being the highest quality, observational studies being less good, and external data having the least quality results. This premise is compatible with the hierarhcy of clinical data, where RCTs are the gold standard.")
+    st.image("hierarchy.png")
+    st.subheader("How Much Quality is Lost in the Tradeoff?")
     st.write("We don't know.")
-    st.subheader('My Project')
-    st.write('The aim of my project is to determine the difference in quality, if any, between synthetic data created from different types of clinical data. These three data types may not produce equal quality of synthetic controls, with RCTs hypothesized to produce a much higher quality (2). However, no research has measured the difference in quality of the synthetic controls produced by these methods. ')
-    st.header('How Can Synthetic Data Quality be Measured and Compared?')
-    st.subheader('Standard Mean Difference')
-    st.write('The standardized mean difference (SMD) measures how closely the synthetic data matches the original data. A SMD of 0 means that there is no difference between datasets and the range of a SMD can be from -1 to 1. Small SMD values are between 0.2-0.5, medium SMD values are between 0.5-0.8, and large SMD values are greater than 0.8.')
-    st.subheader('Treatment Effect Maintenance')
-    st.write('Treatment effect maintenance includes measuring whether a treatment effect analysis using the synthetic data would produce the same results as one using the original data. For example, if the treatment and outcome are both binary, a chi-squared test can be used to determine the treatment effect for each dataset.  If the treatment effect is maintained, we would expect to see a similar significance level in both chi-squared tests.')
-    st.header('Why is this Important for Researchers?')
-    st.subheader('The Past')
-    st.write('Successful studies have been approved using synthetic controls generated from all three types of data in the past (16-19). However, there is currently no way of understanding the difference in data quality between these studies. ')
-    st.subheader('The Future')
-    st.write('It is important to know whether the difference in quality is statistically significant, and by how much, so that future models can balance the need for hard-to-get RCT data with an appropriate estimation of how much better it is in producing quality synthetic data than observational data or external data.')
+    st.subheader("What Does Quality Refer to?")
+    st.write("We don't know.")
+    st.header('My Work')
+    st.subheader('How to Measure Quality')
+    st.write("I propose two metrics to measure the quality of a synthetic control:")
+    st.markdown(" - Respone rate maintenance")
+    st.markdown(" - Closeness to original data")
+    st.write("The response rate maintenance ensures the rate of response to treatment is the kept the same in the control group throughout the synthesis process.  This is calculated by dividing the number of responders to a treatment in the control group by the total size of the control group.")
+    st.write("The closenss to original data compares how well the synthetic data reflects the original data. This is measured by using the standard mean difference, and each variable is calculated individually.")
+    st.subheader("Testing the Quality")
+    st.write("To test the quality differences between synthetic controls created from different data sources, three distinct synthetic control arms were generated from two case studies:")
+    st.markdown(" - COVID-19 and the BNT162b vaccine")
+    st.markdown(" - Crohn's disease and Ustekinumab")
+    st.write("These were selected based on availability of matched studies featuring similar populations in similar years.")
+    st.write("Summary statistics were exported from the original data sources and used to simulate individual-level patient dataframes. These were used as the original data sources. Synthetic datasets were then created from the simulated dataframes. The diagram below shows the flow of data during the study.")
+    st.image("data_flow.png")
+    st.write("Three data types were tested, using three synthesis methods, in four different sample sizes. This resulted in 36 unique scenarios. Each scenario was simulated 10,000 times, resulting in a total of 360,000 simulations.")
+    st.image("study_design.png")
+    st.write("Realistic sample size refers to using the exact sample sizes from the original studies.")
+    st.header("Results")
+    st.write("The following graphs show the results for the CART synthesis method only. There were not significant differences between the synthesis methods.")
+    st.subheader("COVID-19")
+    st.write("The response rate maintenance analysis showed the largest range flucuations in observational data.")
+    st.image("cov_crr.jpg")
+    st.write("The closeness to original data analysis showed the largest SMD range for all data types in the smallest sample size scenario (scenario 1) and a larger RCT range compared to the other data types in the realistic sample size scenario.")
+    st.image("cov_smd.jpg")
+    st.subheader("Crohn's Disease")
+    st.write("The response rate maintenance analysis showed the largest difference between original and synthetic data in the smallest sample size scenario.")
+    st.image("cro_crr.jpg")
+    st.write("Similarly, the closeness to original data analysis again showed the largest SMD range for all data types in the smallest sample size scenario.")
+    st.image("cro_smd.jpg")
+    st.header("Conclusions")
+    st.subheader("What Does it Mean?")
+    st.write("The quality of synthetic controls may change depending on:")
+    st.markdown(" - sample size")
+    st.markdown(" - Data type")
+    st.subheader("What Should I do About it?")
+    st.write("There is no evidence to suggest the assumed hierarchy of quality, with RCTs being the best and external data being the worst. If you are creating your own synthetic controls for a clinical study, you may want to consider sources outside of the traditional RCTs. You should also consider checking the response rate maintenance and closeness to the original data for any synthetic controls you create.  If you are reading other synthetic control studies, keep an eye out for their reported sample sizes and data sources.  The quality of a synthetic control may also differ between disease types, as it did between COVID-19 and Crohn's disease; this is important to consider when reviewing literature.")
 
-    st.header('Want to Know More About my Current Study?')
-    st.write('Of Course You Do!')
-    st.subheader('Data Sources')
-    st.write('Data was simulated using the programming language R to reflect the distributions and ranges expected from external data, observational studies, and RCTs. Simulated datasets took the place of “real” data, and be compared to synthetic data as if it were such.  COVID-19 data is used as a case study to illustrate the differences between data type, chosen based on data availability.')
-    st.write('The outcome and intervention set looked at was testing positive for COVID-19 and the efficacy of the BNT162b2 mRNA vaccine. Data comes from February-August 2021 in the United Kingdom. In RCTs and observational studies, vaccine efficacy was looked at after 10 days following the intervention. Demographic confounders, such as sex, race, and age were incorporated into the analyses based on statistics of COVID-19 data in the UK (20). The trials and data used in the simulations were early after the initial rollout of the vaccine in 2021. RCT data was based on probabilities from a systematic review and meta-analysis (21). Observational study data was based on probabilities from an early vaccination efficacy study on older adults in England (22). External data probabilities were devised from statistics of vaccination rates from the National Health Service in England (23) and accounts of COVID-19 test results from England (24).  ')
-    
-    st.subheader('Synthpop')
-    st.write('Synthpop is an R packaged designed to create synthetic data from input datasets (25). The process of using synthpop in this study has three steps: ')
-    st.markdown('- Preparing the data for synthesis ')
-    st.markdown('- Synthesizing new data')
-    st.markdown('- Comparing the synthetic data')
-    st.write('In the first step, three datasets (external, observational, and RCT) are cleaned so that they have similarly named matching variables to each other. All datasets have an outcome variable, an exposure/treatment variable, and certain demographic variables. ')
-    st.write('Next, the data is synthesized using synthpop. CART modelling is used as the default, but other models are compared within the sensitivity analyses. A new, synthetic dataset is formed for each data type at the end of this step. ')
-    st.write('The final step compares each synthetic dataset to synthetic datasets of other types as well as the original data. Distributions of each variable are compared, and a boxplot is created to visualize the standard mean difference of the simulated datasets to the synthetic datasets. ')
-  
-    st.subheader('Selection of Characteristics')
-    st.write('The outcome will differ depending on the disease or treatment of interest in each study, and therefore it is important to keep the labelling of the treatment/exposure and outcome generic within the data. Demographic characteristics are selected based on availability; all studies must have the same characteristics to be compared. Sex, race, and age were selected based on this metric. The categories included in race differ based on the trial and were therefore simplified to the four main groups presented in the external data: Asian/Asian British, Black/Black British, Mixed race, and White. ')
-    st.subheader('Sample Size Selection')
-    st.write('Having a robust sample size is a crucial aspect of generating accurate synthetic data (12). To mitigate the influence of sample size on the quality of synthetic data produced in this study, simulated studies will be generated three times using three different sample sizes. A generic sample size of 20,000 observations will be created for all data types first. A smaller sample size of 100 observations will also be created for all data types. A third version of the simulations of each data type will be created with a “realistic” sample size based off the original data source. It is expected that RCT data type simulations will have significantly less observations in this version than observational studies or external data. The purpose of doing this is to measure whether there is a change in the quality of synthetic data generated from generic or realistic sample size simulations. Two versions of the generic sample size (100 and 20,000) are used to detect any differences in synthetic data quality change between data types at different sampling amounts. ')
-    st.write('These sample sizes form the four scenarios used within the simulation and synthesis: ')
-    st.markdown('- Scenario 1: n = 100 ')
-    st.markdown('- Scenario 2: n = 20,000 ')
-    st.markdown('- Scenario 3: realistic sample sizes (RCT: n = 18,575; Observational: n = 156, 930; External: n = 20,248,632')
-    st.markdown('- Scenario 4: n = 100 in simulated datasets, n = 20,000 in synthetic datasets ')
-    st.write('Simulations will be run 10,000 times for each sample size scenario. ')
-
-    st.subheader('Results so Far')
-    st.write('CART method:')
-    st.write('The SMD of all variables did not show any significance difference between the simulated data and the synthetic data. This was true across all data types and all scenarios. A boxplot of the results can be seen in Figure 1.')
-    image = Image.open('CART_results.png')
-    st.image(image)
-    st.write('Figure 1: These boxplots show the standard mean difference between the simulated and synthetic data for each measured variable. The boxplots are separated by scenario, with each scenario corresponding to a specified sample size. Each variable has three boxes for different data types, with white being RCT, pink being observational, and grey being external data.')
-
-
-    st.write('Random sampling method:')
-    st.write('The SMD of all variables did not show any significant difference between the simulated data and the synthetic data. This was true across all data types and all scenarios. A boxplot of the results can be seen in Figure 2.')
-    image = Image.open('RS_results.png')
-    st.image(image)
-    st.write('Figure 2: These boxplots show the standard mean difference between the simulated and synthetic data for each measured variable. The boxplots are separated by scenario, with each scenario corresponding to a specified sample size. Each variable has three boxes for different data types, with white being RCT, pink being observational, and grey being external data.')
-   
-
-
-
-    st.write('Linear/logistic regression method:')
-    st.write('The SMD of all variables did not show any significance difference between the simulated data and the synthetic data. This was true across all data types and all scenarios. A boxplot of the results can be seen in Figure 3.')
-    image = Image.open('LL_results.png')
-    st.image(image)
-    st.write('Figure 3: These boxplots show the standard mean difference between the simulated and synthetic data for each measured variable. The boxplots are separated by scenario, with each scenario corresponding to a specified sample size. Each variable has three boxes for different data types, with white being RCT, pink being observational, and grey being external data.')
     
     
-
-    st.write('More results coming soon!')
-
-
-
-    st.subheader('What it Means')
-    st.write('Preliminary results do not show significant differences in SMD between data types. SMD is used to measure the data replicability of the synthetic data; in this way, all three data types are showing high quality synthetic data in every scenario and for all tested synthesis methods.')
-    st.write('This is a case study of a single disease, and these results are not representative of all clinical trials.')
-    st.write('There are several limitations of the study that should be mentioned. The main weakness of the synthesis methods is the computational power and time required to run the simulation study and synthetic data generation at an appropriate number of simulations (N = 10,000 for each scenario) Due to having four different sample size scenarios and three methods tested, the total number of simulations run was 120,000. The choice of COVID-19 as an outcome in the simulation study was not representative of other disease outcomes. While originally picked due to the wide availability of all three data types, it is now apparent that the sample sizes for all three data types are inflated compared to other diseases. This primarily affects the treatment effect estimations and the realistic sample size scenario.')
-    st.subheader('What is Left to do')
-    st.write('So far, this is a case study on a specific treatment and outcome. To confirm these findings, more research will need to be done on other diseases and treatments.')
-
+    
     st.header('References')
     st.markdown("""
 1. Bouttell J, Craig P, Lewsey J, Robinson M, Popham F. Synthetic control methodology as a tool for evaluating population-level health interventions. J Epidemiol Community Health. 2018 Aug 1;72(8):673–8. 
@@ -780,7 +751,7 @@ with tab4:
 """)
 
 with tab5:
-    st.title("Differences in Quality of Bayesian Dynamic Borrowing and Synthetic Control Methods: A Case Study of Pediatric Atopic Dermatitis") # main title
+    st.title("Which is Better: Bayesian Dynamic Borrowing or Synthetic Control Methods?") # main title
 
 with tab6:
     new_title = '<p style="font-size: 35px;"><strong style="font-weight: 900;">About Me!</strong></p>'
