@@ -675,7 +675,7 @@ with tab4:
     st.title("Does the Data Source Used Affect the Quality of a Synthetic Control?") # main title
     st.header("What We Know So Far")
     st.subheader("Data Source Quality")
-    st.write("Previous studies have stated that there is a quality tradeoff in the choice of data source used to create a synthetic control, with RCTs being the highest quality, observational studies being less good, and external data having the least quality results. This premise is compatible with the hierarhcy of clinical data, where RCTs are the gold standard.")
+    st.write("Previous studies have stated that there is a quality tradeoff in the choice of data source used to create a synthetic control, with RCTs being the highest quality, observational studies being less good, and external data having the least quality results. This premise is compatible with the hierarhcy of evidence, where RCTs are the gold standard.")
     st.image("hierarchy.png")
     st.subheader("How Much Quality is Lost in the Tradeoff?")
     st.write("We don't know.")
@@ -721,37 +721,63 @@ with tab4:
     
     
     
-    st.header('References')
-    st.markdown("""
-1. Bouttell J, Craig P, Lewsey J, Robinson M, Popham F. Synthetic control methodology as a tool for evaluating population-level health interventions. J Epidemiol Community Health. 2018 Aug 1;72(8):673–8. 
-2. Thorlund K, Dron L, Park JJH, Mills EJ. Synthetic and External Controls in Clinical Trials – A Primer for Researchers. Clin Epidemiol. 2020 May 8;12:457–67. 
-3. Ali Awan A. What is Synthetic Data? [Internet]. 2023 [cited 2024 Feb 28]. Available from: https://www.datacamp.com/blog/what-is-synthetic-data
-4. Lyman JP, Doucette A, Zheng-Lin B, Cabanski CR, Maloy MA, Bayless NL, et al. Feasibility and utility of synthetic control arms derived from real-world data to support clinical development. J Clin Oncol. 2022 Feb;40(4_suppl):528–528. 
-5. Goldsack J. Synthetic control arms can save time and money in clinical trials [Internet]. STAT. 2019 [cited 2023 Oct 2]. Available from: https://www.statnews.com/2019/02/05/synthetic-control-arms-clinical-trials/
-6. Sibbald B, Roland M. Understanding controlled trials: Why are randomised controlled trials important? BMJ. 1998 Jan 17;316(7126):201. 
-7. Akobeng AK. Understanding randomised controlled trials. Arch Dis Child. 2005 Aug 1;90(8):840–4.
-8. Hariton E, Locascio JJ. Randomised controlled trials—the gold standard for effectiveness research. BJOG Int J Obstet Gynaecol. 2018 Dec;125(13):1716. 
-9. University College London. MRC Clinical Trials Unit at UCL. 2018 [cited 2024 Feb 19]. What is an observational study? Available from: https://www.mrcctu.ucl.ac.uk/patients-public/about-clinical-trials/what-is-an-observational-study/
-10. Song JW, Chung KC. Observational Studies: Cohort and Case-Control Studies. Plast Reconstr Surg. 2010 Dec;126(6):2234–42
-11. Aaser M, McElhaney D. Harnessing the power of external data. McKinsey Digit. 2021;
-12. Burger HU, Gerlinger C, Harbron C, Koch A, Posch M, Rochon J, et al. The use of external controls: To what extent can it currently be recommended? Pharm Stat. 2021;20(6):1002–16. 
-13. Chevret S, Timsit JF, Biard L. Challenges of using external data in clinical trials- an illustration in patients with COVID-19. BMC Med Res Methodol. 2022 Dec 15;22(1):321. 
-14. Burcu M, Dreyer NA, Franklin JM, Blum MD, Critchlow CW, Perfetto EM, et al. Real-world evidence to support regulatory decision-making for medicines: Considerations for external control arms. Pharmacoepidemiol Drug Saf. 2020;29(10):1228–35. 
-15. Lyman JP, Doucette A, Zheng-Lin B, Cabanski CR, Maloy MA, Bayless NL, et al. Feasibility and utility of synthetic control arms derived from real-world data to support clinical development. J Clin Oncol. 2022 Feb;40(4_suppl):528–528. 
-16. Commissioner O of the. FDA. FDA; 2020 [cited 2023 Oct 2]. Statement from FDA Commissioner Scott Gottlieb, M.D., on FDA’s new strategic framework to advance use of real-world evidence to support development of drugs and biologics. Available from: https://www.fda.gov/news-events/press-announcements/statement-fda-commissioner-scott-gottlieb-md-fdas-new-strategic-framework-advance-use-real-world
-17. Berry DA, Elashoff M, Blotner S, Davi R, Beineke P, Chandler M, et al. Creating a synthetic control arm from previous clinical trials: Application to establishing early end points as indicators of overall survival in acute myeloid leukemia (AML). J Clin Oncol. 2017 May 20;35(15_suppl):7021–7021. 
-18. Blondeau K, Schneider A, Ngwa I. A synthetic control arm from observational data to estimate the background incidence rate of an adverse event in patients with Alzheimer’s disease matched to a clinical trial population. Alzheimers Dement. 2020;16(S10):e043657. 
-19. Ko YA, Chen Z, Liu C, Hu Y, Quyyumi AA, Waller LA, et al. Developing a synthetic control group using electronic health records: Application to a single-arm lifestyle intervention study. Prev Med Rep. 2021 Dec 1;24:101572.
-20. GOV.UK. GOV.UK. 2021 [cited 2024 Mar 8]. Demographic data for coronavirus (COVID-19) testing (England): 28 May to 26 August. Available from: https://www.gov.uk/government/publications/demographic-data-for-coronavirus-testing-england-28-may-to-26-august/demographic-data-for-coronavirus-covid-19-testing-england-28-may-to-26-august
-21. Yang ZR, Jiang YW, Li FX, Liu D, Lin TF, Zhao ZY, et al. Efficacy of SARS-CoV-2 vaccines and the dose–response relationship with three major antibodies: a systematic review and meta-analysis of randomised controlled trials. Lancet Microbe. 2023 Apr 1;4(4):e236–46. 
-22. Bernal JL, Andrews N, Gower C, Stowe J, Robertson C, Tessier E, et al. Early effectiveness of COVID-19 vaccination with BNT162b2 mRNA vaccine and ChAdOx1 adenovirus vector vaccine on symptomatic disease, hospitalisations and mortality in older adults in England [Internet]. medRxiv; 2021 [cited 2024 Feb 26]. p. 2021.03.01.21252652. Available from: https://www.medrxiv.org/content/10.1101/2021.03.01.21252652v1              
-23. NHS. COVID-19 Vaccinations Archive [Internet]. 2021 [cited 2024 Feb 28]. Available from: https://www.england.nhs.uk/statistics/statistical-work-areas/covid-19-vaccinations/covid-19-vaccinations-archive/
-24. GOV.UK. Cases in England | Coronavirus in the UK [Internet]. 2021 [cited 2024 Feb 28]. Available from: https://coronavirus.data.gov.uk/details/cases?areaType=nation&areaName=England
-25. Nowok B, Raab GM, Dibben C. synthpop: Bespoke Creation of Synthetic Data in R. J Stat Softw. 2016 Oct 28;74:1–26.
-""")
+   
 
 with tab5:
     st.title("Which is Better: Bayesian Dynamic Borrowing or Synthetic Control Methods?") # main title
+    st.header("What are They?")
+    st.write("Bayesian dynamic borrowing (BDB) and synthetic control methods (SCM) are both used in clinical trial design to reduce dependence on large randomized control arms.")
+    st.subheader("Bayesian Dynamic Borrowing")
+    st.write("BDB creates a prior distribution informed by historical data, which carries information from the sample sizes and outcomes of previous trials with similar populations and the same standard of care/placebo. This prior can be used to estimate the maximum number of patients needed in a control arm to achieve the required power and type 1 error threshold for the study. In dynamic borrowing, the influence of the prior is adjusted based on the similarity between the historical data and observed trial data. If the control group begins to show results incongruent with expectations while using a commensurate or robust MAP (maximum a posteriori) prior, the prior can be downweighted.")
+    st.write("Benefits:")
+    st.markdown(" - can account for variability between historical studies")
+    st.markdown( " - can adjust influence during the trial based on preliminary results")
+    
+    
+    st.write("Drawbacks:")
+    st.markdown(" - still need to recruit a small number of real control arm participants")
+    st.write("The product of BDB is a personalized trial design that gives a specific sample size aim for the control group.")
+    
+    st.subheader("Synthetic Control Methods")
+    st.write("SCM generate a control arm based on previous study data. These control arms have similar distributions, means, and treatment effects to the studies they are based on. Popular approaches include propensity score matching on baseline covariates or linear regression weighting, although decision trees like CART (classification and regression tree) can also be used.  The generated data can be used to augment an existing control arm, increasing the overall sample size; this is referred to as a hybrid synthetic control. The generated data can also be used directly as a full synthetic control arm. In this case, a randomised control trial would recruit only for the treatment arm and the findings would be compared to the synthetic control arm directly.")
+    st.write("Benefits:")
+    st.markdown(" - one-and-done approach for simplicity")
+    st.markdown(" - no need for control arm recruitment whatsoever")
+    st.markdown(" - can incorpate covariate influence (i.e. sex, race)")
+    st.markdown(" - can increase distribution of certain characteristics (e.g. lowering the distribution of age in controls produced for pediatric studies)")
+    
+    st.write("Drawbacks")
+    st.markdown(" - will not be downweighted if controls are not representative")
+    st.markdown(" - less established method for regulatory approval")
+    st.write("The product of SCM is the control group itself.")
+
+    st.header("Comparison")
+    st.subheader("Previous Comparisons")
+    st.write("There are none.")
+    
+    st.header("My Work")
+    st.subheader("Metrics of Comparison")
+    st.write("Response rate, power, and type 1 error are used to compare these methods.")
+    st.subheader("Study Design")
+    st.write("Pediatric atopic dermatitis was chosen as a case study for comparing BDB and SCM. Pediatric trials are often difficult to recruit for, leading to reliance on one of these methods.")
+    st.write("The same six historical RCTs were selected for use in both methods. Placebo group sample sizes and response rates were included from each study.")
+    st.write("A MAP prior was created for the BDB method.  The CART method was used for the SCM method. To calculate the power and type 1 error in the SCM method, the synthesis process was repeated 10,000 times. The sample sizse for the synthetic controls was set to equal the mean of the historical study sample sizes.")
+
+    st.header("Results")
+    st.subheader("Response Rate")
+    st.write("The response rate of both BDB and SCM were based on the historical studies.  The forest plots below show the differences alongside the historical study rates. ")
+    st.image("forest.png")
+    st.write("The MAP prior had a mean of 0.2 with a large credible interval from 0.02 to 0.71, and the synthetic control had a mean of 0.25 with a confidence interval from 0.16 to 0.35.  Note that the credible interval and confidence interval are not a direct comparison due to being Bayesian and frequentist respectively: a credible interval means there is a 95% probability that the true parameter lies within that range, and a confidence interval means that in 100 repeated samples from the population, the true population parameter would be within that range 95 times. The methodologies incorporate the historical information differently: BDB is looking at the cumulative information from the intervals of previous studies, while SCM is creating a new interval based on the historical information.  ")
+    st.subheader("Power and Type 1 Error")
+    st.write("BDB produced a robust power of 0.580 and a robust type 1 error rate of 0.026. SCM produced a power of 0.676 and a type 1 error rate of 0.027.")
+
+    st.header("Conclusion")
+    st.subheader("What Happened?")
+    st.write("The type 1 error rate was similar between the two methods. SCM showed an increased power over BDB.  The response rates had a similar mean in both studies, but the credible interval in BDB was wider than the confidence interval in SCM. ")
+    st.subheader("What Does it Mean?")
+    st.write("While the increased power in SCM may lead some to choose that method, the real answer to the question 'which is better?' is more nuanced. BDB and SCM have different use cases in the real world.  BDB is used to determine a maximum sample size needed for a control group, and SCM is used to generate the control group itself. Practically, determining which method is “better” will depend on the specific needs of the study, such as how difficult recruitment is. In cases where recruitment for the control group is near impossible, SCM is a much better choice. In cases where recruitment as a whole is a challenge but allocation to the control group is not an issue, BDB may have more regulatory appeal. Overall, the results provided evidence that both methods are viable.  ")
+
+
 
 with tab6:
     new_title = '<p style="font-size: 35px;"><strong style="font-weight: 900;">About Me!</strong></p>'
