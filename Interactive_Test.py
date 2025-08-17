@@ -803,6 +803,9 @@ with tab6:
 
 with tab7:
     st.title("Check Out My Zines!")
+    st.write("These zines were created to help advertise my talk at ISCB 2025.")
+    st.image("zine1.png")
+    st.image("zine2.png")
 with tab8:
 
     # Define the scope for accessing Google Sheets and Google Drive
