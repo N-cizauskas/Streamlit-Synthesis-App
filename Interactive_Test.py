@@ -364,7 +364,7 @@ with tab2:
 
 
     st.subheader('2) Synthesizer:')
-    st.write('The second section synthesizes new data based on the original data created in the first section. There are three options for synthesis method: CART (Classification and Regression Trees), random sampling, and linear/logisitc regression.  Select your method of synthesis and then click the button to synthesize new data!')
+    st.write('The second section synthesizes new data based on the original data created in the first section. There are three options for synthesis method: CART (Classification and Regression Trees), random sampling, and linear/logistic regression.  Select your method of synthesis and then click the button to synthesize new data!')
 
     st.markdown("- CART: a decision tree that can create a new dataset by recursively partitioning the data based on feature splits and then assigning synthetic values to new points using the statistical properties of the data in each terminal leaf node")
     st.markdown("- Random sampling: selects data points at random from each column in the original data until a new dataset of the desired size is formed")
@@ -388,7 +388,7 @@ with tab2:
 
 
     st.subheader('3) Analysis:')
-    st.write('The third section allows you to visually compare the original dataset to the new, synthetic dataset you have created.  Continuous variables are compared using a box plot and cateogical/binary variables are compared using stacked bar plots. Click the analysis button to generate graphs!')
+    st.write('The third section allows you to visually compare the original dataset to the new, synthetic dataset you have created.  Continuous variables are compared using a box plot and categoical/binary variables are compared using stacked bar plots. Click the analysis button to generate graphs!')
 
 
     # visualize the results and compare
@@ -686,7 +686,7 @@ with tab4:
     st.write("I propose two metrics to measure the quality of a synthetic control:")
     st.markdown(" - Respone rate maintenance")
     st.markdown(" - Closeness to original data")
-    st.write("The response rate maintenance ensures the rate of response to treatment is the kept the same in the control group throughout the synthesis process.  This is calculated by dividing the number of responders to a treatment in the control group by the total size of the control group.")
+    st.write("The response rate maintenance ensures the rate of response to treatment is kept the same in the control group throughout the synthesis process.  This is calculated by dividing the number of responders to a treatment in the control group by the total size of the control group.")
     st.write("The closenss to original data compares how well the synthetic data reflects the original data. This is measured by using the standard mean difference, and each variable is calculated individually.")
     st.subheader("Testing the Quality")
     st.write("To test the quality differences between synthetic controls created from different data sources, three distinct synthetic control arms were generated from two case studies:")
@@ -703,7 +703,7 @@ with tab4:
     st.subheader("COVID-19")
     st.write("The response rate maintenance analysis showed the largest range flucuations in observational data.")
     st.image("cov_crr.jpg")
-    st.write("The closeness to original data analysis showed the largest SMD range for all data types in the smallest sample size scenario (scenario 1) and a larger RCT range compared to the other data types in the realistic sample size scenario.")
+    st.write("The closeness to original data analysis showed the largest SMD (standard mean difference) range for all data types in the smallest sample size scenario (scenario 1) and a larger RCT range compared to the other data types in the realistic sample size scenario.")
     st.image("cov_smd.jpg")
     st.subheader("Crohn's Disease")
     st.write("The response rate maintenance analysis showed the largest difference between original and synthetic data in the smallest sample size scenario.")
